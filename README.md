@@ -102,3 +102,7 @@ close(fd2);
 ## Conclusion
 
 The **Get Next Line** project strengthens your understanding of file handling, memory management, and modular programming in C. Upon completion, you'll have a versatile and reusable function that can be used in various scenarios requiring line-by-line file processing. This project is an excellent opportunity to practice efficient memory usage and develop your ability to manage complex state across function calls.
+
+## License
+This project is part of the 42 School curriculum and is intended for educational purposes.
+```
