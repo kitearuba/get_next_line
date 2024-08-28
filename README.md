@@ -1,12 +1,12 @@
 ---
 
-# 📝 **Get Next Line** - _42 School Project_
+# 🖨️ **ft_printf** - _42 School Project_
 
-![Get Next Line](https://img.shields.io/badge/42-Project-blue?style=flat-square)
+![ft_printf](https://img.shields.io/badge/42-Project-blue?style=flat-square)
 
 ## 📖 **Overview**
 
-The **Get Next Line** project challenges you to create a function that reads a file or standard input one line at a time. This project is all about mastering file I/O, efficient memory management, and static variables. With this function, you can process files line-by-line, allowing for modular and scalable file handling in C.
+The **ft_printf** project challenges you to re-implement the standard `printf()` function in C, focusing on handling **variadic functions**, **memory management**, and **formatted output**. This project helps you master low-level C programming concepts, which are critical for writing efficient, custom functions.
 
 ---
 
@@ -14,129 +14,117 @@ The **Get Next Line** project challenges you to create a function that reads a f
 
 ### 🛠️ **Function Prototype**
 ```c
-char *get_next_line(int fd);
+int ft_printf(const char *format, ...);
 ```
 
 ### 📝 **Description**
-`get_next_line` reads and returns the next line from a file descriptor `fd`. Successive calls to the function will return the next line until the end of the file is reached or an error occurs. If a newline character (`\n`) is present, it will be included in the returned string. When no more lines are available, the function returns `NULL`.
+`ft_printf` mimics the functionality of the standard `printf()` function, which prints formatted output to the standard output. It supports several format specifiers to display various types of data, such as characters, strings, and numbers, using **variadic arguments**.
 
 ---
 
-### ⚙️ **Features**
+### ⚙️ **Supported Format Specifiers**
 
-- **Single Line Reading**: Efficiently reads one line at a time, which is perfect for processing text files or handling input.
-- **Adjustable Buffer Size**: You can adjust the reading buffer size using the `BUFFER_SIZE` macro at compilation. This makes the function adaptable to different file sizes and system environments.
-- **Memory Safety**: Dynamically allocated memory is properly managed, preventing leaks and ensuring that memory is freed appropriately.
+- **Character & String Conversion**:
+  - `%c`: Print a single character.
+  - `%s`: Print a string of characters.
+- **Pointer Conversion**:
+  - `%p`: Print a pointer address in hexadecimal format.
+- **Integer Conversion**:
+  - `%d` / `%i`: Print a signed decimal integer.
+  - `%u`: Print an unsigned decimal integer.
+  - `%x` / `%X`: Print a number in hexadecimal format (lowercase/uppercase).
+- **Special Conversion**:
+  - `%%`: Print a literal percentage sign.
 
 ---
 
 ### 📂 **Files**
 
-- **`get_next_line.c`**: Contains the core logic for reading a single line.
-- **`get_next_line_utils.c`**: Implements utility functions to support the main logic.
-- **`get_next_line.h`**: Header file with function prototypes and necessary includes.
+- **`ft_printf.c`**: Contains the core logic of the `ft_printf()` function.
+- **`ft_printf_utils.c`**: Helper functions to support various formatting operations.
+- **`ft_printf.h`**: Header file with function prototypes and necessary includes.
+- **`libft` directory**: Contains the standard `libft` library used in conjunction with `ft_printf`.
 
 ---
 
-### 🛠️ **Usage**
+### 🛠️ **Makefile Usage**
 
-To compile the `get_next_line` function, you can define the buffer size during compilation using the `BUFFER_SIZE` macro:
+The Makefile simplifies the compilation process and provides several useful commands:
 
-```bash
-cc -Wall -Werror -Wextra -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c -o get_next_line
-```
+| Command       | Description                              |
+|---------------|------------------------------------------|
+| `make`        | Compiles the `libftprintf.a` library.    |
+| `make clean`  | Removes object files generated during compilation. |
+| `make fclean` | Removes all object files and the compiled library (`libftprintf.a`). |
+| `make re`     | Cleans and recompiles everything from scratch. |
 
-Once compiled, you can use `get_next_line` in your code to read each line from a file or standard input:
-
-```c
-int fd = open("file.txt", O_RDONLY);
-char *line;
-
-while ((line = get_next_line(fd)) != NULL) {
-    // Process the line
-    free(line);  // Don't forget to free the line after processing
-}
-
-close(fd);  // Always close the file descriptor when you're done
-```
+After running `make`, you will generate `libftprintf.a`, a static library that can be used in your own projects.
 
 ---
 
-### ⚠️ **Constraints**
+## 🛠️ **Usage**
 
-- **Prohibited Functions**: You cannot use `libft`, `lseek`, or global variables.
-- **Intended Use**: This function is designed for reading text files. The behavior with binary files is undefined and should be avoided.
-- **Static Variables**: You’ll need to use static variables to maintain the function’s state across multiple calls.
+1. **Include the Header**
 
----
+   To use `ft_printf` in your project, include the `ft_printf.h` header file:
+   ```c
+   #include "ft_printf.h"
+   ```
 
-## 🎉 **Bonus Part**
+2. **Compile Your Project**
 
-### 🔥 **Additional Features**
+   You can compile your project and link it with the `ft_printf` library:
+   ```bash
+   gcc your_program.c -L. -lftprintf -o your_program
+   ```
 
-The bonus part of **Get Next Line** extends its functionality to handle **multiple file descriptors** simultaneously. This means you can have multiple calls to `get_next_line` on different file descriptors at the same time, and the function will independently manage the state for each.
+3. **Example**
 
----
+   Here’s an example of how to use `ft_printf`:
+   ```c
+   #include "ft_printf.h"
 
-### 📂 **Bonus Files**
-
-- **`get_next_line_bonus.c`**: Contains the logic for handling multiple file descriptors.
-- **`get_next_line_utils_bonus.c`**: Helper functions supporting the bonus logic.
-- **`get_next_line_bonus.h`**: Header file with the bonus function prototypes.
-
----
-
-### 🛠️ **Bonus Compilation**
-
-To compile the bonus version of `get_next_line`, use the following command:
-
-```bash
-cc -Wall -Werror -Wextra -D BUFFER_SIZE=42 get_next_line_bonus.c get_next_line_utils_bonus.c -o get_next_line_bonus
-```
+   int main(void)
+   {
+       ft_printf("Hello, %s!\n", "42");
+       return 0;
+   }
+   ```
 
 ---
 
-### 🧪 **Testing with Multiple File Descriptors**
+### 🔄 **Relinking and Dependencies**
 
-You can test the bonus functionality by reading from multiple files at the same time:
-
-```c
-int fd1 = open("file1.txt", O_RDONLY);
-int fd2 = open("file2.txt", O_RDONLY);
-
-char *line1 = get_next_line(fd1);
-char *line2 = get_next_line(fd2);
-
-// Alternate between file descriptors
-free(line1);
-free(line2);
-
-close(fd1);
-close(fd2);
-```
+The Makefile is designed to prevent **unnecessary relinking**. If any source or header file in the `libft` or `ft_printf` directories changes, the Makefile will detect the changes and recompile only the affected files, ensuring an efficient build process.
 
 ---
 
-### 🧠 **Key Considerations**
+## 🎯 **Bonus Part**
 
-- **Edge Cases**: Test with different buffer sizes and file types to ensure your implementation is robust.
-- **Multiple FD Handling**: The static variable in the function must maintain separate states for each file descriptor, which is critical for correct functionality in the bonus part.
+The bonus part of the **ft_printf** project extends the function's capabilities by adding support for extra formatting options, such as:
+- **Field Width & Precision**: Manage the minimum number of characters to print and control the precision for floating-point numbers.
+- **Flags**: Handle flags such as `-`, `0`, `+`, `#`, and `' '` (space).
+
+This part adds more depth to your implementation and demonstrates your understanding of advanced formatting techniques.
+
+---
+
+### ⚙️ **Bonus Features**
+
+In the bonus section, you'll implement additional format specifiers and flags to further enhance `ft_printf`:
+- `-`: Left-align the output within the specified field width.
+- `0`: Pad the output with zeros instead of spaces.
+- `+`: Precede the output with a plus or minus sign for numeric conversions.
+- `#`: Add a prefix for octal (`0`) or hexadecimal (`0x`, `0X`) values.
+- `' '` (space): Insert a space before positive numbers in numeric conversions.
 
 ---
 
 ## 🏆 **Conclusion**
 
-The **Get Next Line** project enhances your skills in file handling, memory management, and modular programming in C. Upon completion, you'll have developed a versatile and efficient function that can be applied to many scenarios requiring line-by-line file reading. It's a great opportunity to hone your C programming abilities!
+The **ft_printf** project is a fantastic opportunity to deepen your understanding of C, particularly in the areas of variadic functions, formatted output, and memory management. By implementing such a widely used function from scratch, you’ll gain valuable experience that will be beneficial in future projects.
 
----
-
-## 📜 **License**
-This project is part of the 42 School curriculum and is intended for educational purposes.
-
----
-
-### 🎨 **Final Notes**
-The project not only helps you practice efficient memory usage but also pushes your understanding of managing function state across multiple calls using static variables. Keep testing with different edge cases, and have fun coding! ✨
+Good luck, and happy coding! 🚀
 
 ---
 
