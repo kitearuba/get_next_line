@@ -130,11 +130,6 @@ The **Get Next Line** project enhances your skills in file handling, memory mana
 
 ---
 
-## 👨‍💻 **Author**
-**chrrodri** - _42 Barcelona_
-
----
-
 ## 📜 **License**
 This project is part of the 42 School curriculum and is intended for educational purposes.
 
@@ -142,5 +137,14 @@ This project is part of the 42 School curriculum and is intended for educational
 
 ### 🎨 **Final Notes**
 The project not only helps you practice efficient memory usage but also pushes your understanding of managing function state across multiple calls using static variables. Keep testing with different edge cases, and have fun coding! ✨
+
+---
+
+## 👨‍💻 **Author**
+
+**chrrodri**  
+_42 Barcelona_
+
+[GitHub Profile](https://github.com/kitearuba)
 
 ---
