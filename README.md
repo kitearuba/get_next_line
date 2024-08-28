@@ -105,4 +105,4 @@ The **Get Next Line** project strengthens your understanding of file handling, m
 
 ## License
 This project is part of the 42 School curriculum and is intended for educational purposes.
-```
+
